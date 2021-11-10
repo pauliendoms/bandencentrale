@@ -1,0 +1,7 @@
+- [ ] class Tire Center
+- [ ] class Article
+- [ ] class Rim
+- [ ] class Tire
+- [ ] class Customer
+- [ ] class Company
+- [ ] class Invoice
