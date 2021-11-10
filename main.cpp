@@ -33,7 +33,7 @@ string login() {
 int menu(string user) {
     int keuze;
 
-    cout << "Wat wil je doen?" << endl;
+    cout << "Menu: " << endl;
 
     if (user == "admin") {
         cout << "1. Customers" << endl;
@@ -48,7 +48,8 @@ int menu(string user) {
         cout << "4. Invoices" << endl;
         cout << "5. Articles" << endl;
     }
-
+    
+    cout << "" << endl;
     cin >> keuze;
     return keuze;
 }

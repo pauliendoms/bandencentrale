@@ -1,11 +1,12 @@
 #include <iostream>
 #include <Customer.h>
 #include <Article.h>
+#include <vector>
 using namespace std;
 
 class Invoice {
     public:
-        Invoice(Customer c, Article a, float p, int d) {
+        Invoice(Customer c, vector<Article> a, float p, int d) {
             customer = c;
             articles = a;
             price = p;
@@ -15,7 +16,7 @@ class Invoice {
         void setCustomer(Customer c) {
             customer = c;
         }
-        void setArticles(Article a) {
+        void setArticles(vector<Article> a) {
             articles = a;
         }
         void setPrice(float p) {
@@ -24,9 +25,21 @@ class Invoice {
         void setDiscount(int d) {
             discount = d;
         }
+        Customer getCustomer() {
+            return customer;
+        }
+        vector<Article> getArticles() {
+            return articles;
+        }
+        float getPrice() {
+            return price;
+        }
+        int getDiscount() {
+            return discount;
+        }
     private:
         Customer customer;
-        Article articles;
+        vector<Article> articles;
         float price;
         int discount;
 };

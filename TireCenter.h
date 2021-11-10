@@ -1,11 +1,12 @@
 #include <iostream>
 #include <Article.h>
 #include <Customer.h>
+#include <vector>
 using namespace std;
 
 class TireCenter {
     public:
-        TireCenter(string n, string ad, Article ar, Customer c) {
+        TireCenter(string n, string ad, vector<Article> ar, vector<Customer> c) {
             name = n;
             address = ad;
             articles = ar;
@@ -18,10 +19,10 @@ class TireCenter {
         void setAddress(string a) {
             address = a;
         }
-        void setArticles(Article a) {
+        void setArticles(vector<Article> a) {
             articles = a;
         }
-        void setCustomers(Customer c) {
+        void setCustomers(vector<Customer> c) {
             customers = c;
         }
         string getName() {
@@ -30,15 +31,15 @@ class TireCenter {
         string getAddress() {
             return address;
         }
-        Article getArticles() {
+        vector<Article> getArticles() {
             return articles;
         }
-        Customer getCustomers() {
+        vector<Customer> getCustomers() {
             return customers;
         }
     private:
         string name;
         string address;
-        Article articles;
-        Customer customers;
+        vector<Article> articles;
+        vector<Customer> customers;
 };
