@@ -3,6 +3,12 @@ using namespace std;
 
 class Customer {
     public:
+        Customer(string n, string a, char t) {
+            name = n;
+            address = a;
+            type = t;
+        }
+        ~Customer() {}
         void setName(string n) {
             name = n;
         }

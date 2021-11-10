@@ -1,35 +1,55 @@
 #include <iostream>
 using namespace std;
 
-void menu();
-void stock();
-void klanten();
-void facturatie();
+string login();
+int menu(string);
 
 int main() {
-
-}
-
-void menu() {
+    string user;
     int keuze;
 
-    cout << "Wat wil je doen?" << endl;
-    cout << "1. Stock" << endl;
-    cout << "2. Klanten" << endl;
-    cout << "3. Facturatie" << endl;
-
-    cin >> keuze;
+    user = login();
+    keuze = menu(user);
 
     switch(keuze) {
         case 1:
-            stock();
             break;
         case 2:
-            klanten();
             break;
         case 3:
-            facturatie();
             break;
     }
+
+}
+
+string login() {
+    string login;
+    cout << "Enter login: ";
+    cin >> login;
+    cout << "" << endl;
+    return login;
+}
+
+int menu(string user) {
+    int keuze;
+
+    cout << "Wat wil je doen?" << endl;
+
+    if (user == "admin") {
+        cout << "1. Customers" << endl;
+        cout << "2. Order" << endl;
+        cout << "3. Update Stock" << endl;
+        cout << "4. Invoices" << endl;
+        cout << "5. Articles" << endl;
+    } else if (user == "employee") {
+        cout << "1. Customers" << endl;
+        cout << "2. Order" << endl;
+        cout << "3. Update Stock" << endl;
+        cout << "4. Invoices" << endl;
+        cout << "5. Articles" << endl;
+    }
+
+    cin >> keuze;
+    return keuze;
 }
 

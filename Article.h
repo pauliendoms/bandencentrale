@@ -3,6 +3,15 @@ using namespace std;
 
 class Article {
     public:
+        Article(string n, string m, int s, int d, float p, char t) {
+            name = n;
+            manufacturer = m;
+            stock = s;
+            diameter = d;
+            price = p;
+            type = t;
+        }
+        ~Article() {}
         void setName(string n) {
             name = n;
         }

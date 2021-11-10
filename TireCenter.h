@@ -5,6 +5,13 @@ using namespace std;
 
 class TireCenter {
     public:
+        TireCenter(string n, string ad, Article ar, Customer c) {
+            name = n;
+            address = ad;
+            articles = ar;
+            customers = c;
+        }
+        ~TireCenter() {}
         void setName(string n) {
             name = n;
         }
