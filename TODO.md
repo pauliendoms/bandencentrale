@@ -8,4 +8,4 @@
 
 - Look up class inheritance for cpp for classes tire and rim so they can be a subclass of superclass article
 - same for customers and companies
-- 
+- wachtwoord voor admin?
