@@ -40,20 +40,11 @@ int menu(string user) {
     int keuze;
 
     cout << "Menu: " << endl;
-
-    if (user == ADMIN) {
-        cout << "1. Customers" << endl;
-        cout << "2. Order" << endl;
-        cout << "3. Update Stock" << endl;
-        cout << "4. Invoices" << endl;
-        cout << "5. Articles" << endl;
-    } else if (user == EMPLOYEE) {
-        cout << "1. Customers" << endl;
-        cout << "2. Order" << endl;
-        cout << "3. Update Stock" << endl;
-        cout << "4. Invoices" << endl;
-        cout << "5. Articles" << endl;
-    }
+    cout << "1. Customers" << endl;
+    cout << "2. Order" << endl;
+    cout << "3. Update Stock" << endl;
+    cout << "4. Invoices" << endl;
+    cout << "5. Articles" << endl;
     
     ENTER;
     cin >> keuze;
