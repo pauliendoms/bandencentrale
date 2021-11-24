@@ -4,10 +4,11 @@ using namespace std;
 
 class Rim: public Article {
     public:
-        Rim(boolean a, string c, int w) {
+        Rim(string n, string m, int s, int d, float p, char t, boolean a, string c, int w) {
             aluminium = a;
             color = c;
             width = w;
+            Article(n, m, s, d, p, t);
         }
         ~Rim() {}
         void setAluminium(boolean a) {

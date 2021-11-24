@@ -4,11 +4,12 @@ using namespace std;
 
 class Tire: public Article {
     public:
-        Tire(int w, int h, string i, char s) {
+        Tire(string n, string m, int s, int d, float p, char t, int w, int h, string i, char se) {
             width = w;
             height = h;
             speedIndex = i;
-            season = s;
+            season = se;
+            Article(n, m, s, d, p, t);
         }
         ~Tire() {}
         void setWidth(int w) {
