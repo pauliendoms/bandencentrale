@@ -8,7 +8,6 @@ class Rim: public Article {
             aluminium = a;
             color = c;
             width = w;
-            Article(n, m, s, d, p, t);
         }
         ~Rim() {}
         void setAluminium(boolean a) {

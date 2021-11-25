@@ -9,7 +9,6 @@ class Tire: public Article {
             height = h;
             speedIndex = i;
             season = se;
-            Article(n, m, s, d, p, t);
         }
         ~Tire() {}
         void setWidth(int w) {
