@@ -1,33 +1,15 @@
-#include <iostream>
 #include <Article.h>
-using namespace std;
 
 class Rim: public Article {
     public:
-        Rim(string n, string m, int s, int d, float p, char t, boolean a, string c, int w) {
-            aluminium = a;
-            color = c;
-            width = w;
-        }
-        ~Rim() {}
-        void setAluminium(boolean a) {
-            aluminium = a;
-        }
-        void setColor(string c) {
-            color = c;
-        }
-        void setWidth(int w) {
-            width = w;
-        }
-        boolean getAluminium() {
-            return aluminium;
-        }
-        string getColor() {
-            return color;
-        }
-        int getWidth() {
-            return width;
-        }
+        Rim(string, string, int, int, float, char, boolean, string, int);
+        ~Rim();
+        void setAluminium(boolean);
+        void setColor(string);
+        void setWidth(int);
+        boolean getAluminium();
+        string getColor();
+        int getWidth();
     private:
         boolean aluminium;
         string color;

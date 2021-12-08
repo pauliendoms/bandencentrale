@@ -1,32 +1,15 @@
-#include <iostream>
-using namespace std;
-
 class Customer {
     public:
-        Customer(string n, string a, char t) {
-            name = n;
-            address = a;
-            type = t;
-        }
-        ~Customer() {}
-        void setName(string n) {
-            name = n;
-        }
-        void setAddress(string a) {
-            address = a;
-        }
-        void setType(char t) {
-            type = t;
-        }
-        string getName() {
-            return name;
-        }
-        string getAddress() {
-            return address;
-        }
-        char getType() {
-            return type;
-        }
+        Customer(string, string, char);
+        ~Customer();
+        
+        void setName(string);
+        void setAddress(string);
+        void setType(char);
+
+        string getName();
+        string getAddress();
+        char getType();
     private:
         string name;
         string address;
