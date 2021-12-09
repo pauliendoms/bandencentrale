@@ -1,31 +1,37 @@
 #include <iostream>
 #include "Rim.h"
-
+#include "Customer.h"
+#include "Company.h"
+#include "TireCenter.h"
+#include "Article.h"
+#include "Tire.h"
+#include <vector>
 
 #define ADMIN "admin"
 #define EMPLOYEE "employee"
 #define ENTER cout << "" << endl
 using namespace std;
 
+vector<Article> articles;
+vector<Customer> customers;
+
+TireCenter tirecenter = TireCenter("BadYear", "Bandenstraat 14, Brussel", articles, customers);
+
 string login();
 int menu(string);
-void customers(string);
-void articles(string);
+void customer_functions(string);
+void article_functions(string);
 
 int main() {
     string user;
     int keuze;
-
-    Rim rim = Rim("Naam", "Michelin", 5, 12, 4.6, 'r', true, "Geel", 6);
-    cout << rim.getColor() << endl;
-    cout << rim.getManufacturer() << endl;
 
     user = login();
     keuze = menu(user);
 
     switch(keuze) {
         case 1:
-            customers(user);
+            customer_functions(user);
             break;
         case 2:
             break;
@@ -59,7 +65,7 @@ int menu(string user) {
     return keuze;
 }
 
-void customers(string user) {
+void customer_functions(string user) {
     int keuze;
     cout << "1. Search Customer" << endl;
     cout << "2. Add Customer" << endl;
@@ -75,6 +81,26 @@ void customers(string user) {
         case 1:
             break;
         case 2:
+            Customer customer;
+            string n; string a; char t; string v; int d;
+            cout << "Enter customer name: " << endl;
+            cin >> n;
+            cout << "Enter customer address: " << endl;
+            cin >> a;
+            cout << "Enter customer type: " << endl;
+            cin >> t;
+            
+            if (t == 'p') {
+                customer = Customer(n, a, t);
+                tirecenter.addCustomer(customer);
+            } else if (t == 'c') {
+                cout << "Enter the company VAT: " << endl;
+                cin >> v;
+                cout << "Enter the volume discount: " << endl;
+                cin >> d;
+                
+                customer = Company(n, a, t, v, d);
+            }
             break;
         case 3:
             break;
@@ -85,13 +111,13 @@ void customers(string user) {
                 break;
             }
         default:
-            customers(user);
+            customer_functions(user);
             break;
 
     }
 }
 
-void articles(string user) {
+void article_functions(string user) {
     int keuze;
     cout << "1. Search Article" << endl;
     cout << "2. Change Article" << endl;
@@ -121,7 +147,7 @@ void articles(string user) {
                 break;
             }
         default:
-            customers(user);
+            customer_functions(user);
             break;
 
     }

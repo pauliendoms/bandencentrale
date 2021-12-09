@@ -17,6 +17,8 @@ class TireCenter {
         string getAddress();
         vector<Article> getArticles();
         vector<Customer> getCustomers();
+
+        void addCustomer(Customer customer);
     private:
         string name;
         string address;

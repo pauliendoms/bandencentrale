@@ -31,3 +31,7 @@ vector<Article> TireCenter::getArticles() {
 vector<Customer> TireCenter::getCustomers() {
     return customers;
 }
+
+void TireCenter::addCustomer(Customer customer) {
+    customers.push_back(customer);
+}
