@@ -1,13 +1,17 @@
 #include "Invoice.h"
 
+Invoice::Invoice(Customer c, vector<Article> a, float p, int d)
+    :customer(c), articles(a), price(p), discount(d) {}
+
+/*
 Invoice::Invoice(Customer c, vector<Article> a, float p, int d) {
     customer = c;
     articles = a;
     price = p;
     discount = d;
-}
+} */
 Invoice::~Invoice() {}
-void setCustomer(Customer c) {
+void Invoice::setCustomer(Customer c) {
     customer = c;
 }
 void Invoice::setArticles(vector<Article> a) {

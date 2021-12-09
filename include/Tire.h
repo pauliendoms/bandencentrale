@@ -4,7 +4,7 @@
 class Tire: public Article {
     public:
         Tire(string, string, int, int, float, char, int, int, string, char);
-        ~Tire() {}
+        ~Tire();
         
         void setWidth(int w);
         void setHeight(int h);

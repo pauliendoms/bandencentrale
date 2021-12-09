@@ -9,7 +9,8 @@ class TireCenter {
         ~TireCenter();
 
         void setName(string);
-        void setAddress(string);r<Article>;
+        void setAddress(string);
+        void setArticles(vector<Article>);
         void setCustomers(vector<Customer>);
 
         string getName();

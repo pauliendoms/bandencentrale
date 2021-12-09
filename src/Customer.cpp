@@ -6,7 +6,7 @@ Customer::Customer(string n, string a, char t) {
     type = t;
 }
 Customer::~Customer() {}
-void setName(string n) {
+void Customer::setName(string n) {
     name = n;
 }
 void Customer::setAddress(string a) {

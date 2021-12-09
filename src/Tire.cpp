@@ -1,17 +1,22 @@
 #include "Tire.h"
 
+Tire::Tire(string n, string m, int s, int d, float p, char t, int w, int h, string i, char se)
+    :Article(n, m, s, d, p, t), width(w), height(h), speedIndex(i), season(se) {}
+
+/*
 Tire::Tire(string n, string m, int s, int d, float p, char t, int w, int h, string i, char se) {
-    name = n;
-    manufacterer = m;
-    stock = s;
-    diameter = d;
-    price = p;
-    type = t;
+    setName(n);
+    setManufacturer(m);
+    setStock(s);
+    setDiameter(d);
+    setPrice(p);
+    setType(t);
     width = w;
     height = h;
     speedIndex = i;
     season = se;
-}
+} */
+
 Tire::~Tire() {}
 void Tire::setWidth(int w) {
     width = w;

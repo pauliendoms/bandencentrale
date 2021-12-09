@@ -7,7 +7,7 @@ TireCenter::TireCenter(string n, string ad, vector<Article> ar, vector<Customer>
     customers = c;
 }
 TireCenter::~TireCenter() {}
-void setName(string n) {
+void TireCenter::setName(string n) {
     name = n;
 }
 void TireCenter::setAddress(string a) {

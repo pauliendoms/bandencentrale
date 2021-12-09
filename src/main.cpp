@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Rim.h"
 
 
 #define ADMIN "admin"
