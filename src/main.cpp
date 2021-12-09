@@ -1,4 +1,6 @@
 #include <iostream>
+
+
 #define ADMIN "admin"
 #define EMPLOYEE "employee"
 #define ENTER cout << "" << endl
@@ -12,6 +14,10 @@ void articles(string);
 int main() {
     string user;
     int keuze;
+
+    Rim rim = Rim("Naam", "Michelin", 5, 12, 4.6, 'r', true, "Geel", 6);
+    cout << rim.getColor() << endl;
+    cout << rim.getManufacturer() << endl;
 
     user = login();
     keuze = menu(user);

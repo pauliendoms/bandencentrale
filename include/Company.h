@@ -1,4 +1,5 @@
-#include <Customer.h>
+#pragma once
+#include "Customer.h"
 
 class Company: public Customer {
     public:

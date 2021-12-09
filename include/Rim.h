@@ -1,17 +1,18 @@
-#include <Article.h>
+#pragma once
+#include "Article.h"
 
 class Rim: public Article {
     public:
-        Rim(string, string, int, int, float, char, boolean, string, int);
+        Rim(string, string, int, int, float, char, bool, string, int);
         ~Rim();
-        void setAluminium(boolean);
+        void setAluminium(bool);
         void setColor(string);
         void setWidth(int);
-        boolean getAluminium();
+        bool getAluminium();
         string getColor();
         int getWidth();
     private:
-        boolean aluminium;
+        bool aluminium;
         string color;
         int width;
 };

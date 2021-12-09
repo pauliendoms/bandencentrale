@@ -1,4 +1,4 @@
-#include <Invoice.h>
+#include "Invoice.h"
 
 Invoice::Invoice(Customer c, vector<Article> a, float p, int d) {
     customer = c;

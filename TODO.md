@@ -1,13 +1,5 @@
-- [ ] class Tire Center
-- [ ] class Article
-- [ ] class Rim
-- [ ] class Tire
-- [ ] class Customer
-- [ ] class Company
-- [ ] class Invoice
+- van article een abstracte class maken
 
-- Look up class inheritance for cpp for classes tire and rim so they can be a subclass of superclass article
-- same for customers and companies
 - wachtwoord voor admin?
 
 - Die constructors van tire en rim kloppen nog ni, alle elementen van article moeten daar ook hun waarde krijgen.

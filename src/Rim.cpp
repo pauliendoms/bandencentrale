@@ -1,6 +1,12 @@
-#include <Rim.h>
+#include "Rim.h"
 
-Rim::Rim(string n, string m, int s, int d, float p, char t, boolean a, string c, int w) {
+Rim::Rim(string n, string m, int s, int d, float p, char t, bool a, string c, int w) {
+    name = n;
+    manufacterer = m;
+    stock = s;
+    diameter = d;
+    price = p;
+    type = t;
     aluminium = a;
     color = c;
     width = w;

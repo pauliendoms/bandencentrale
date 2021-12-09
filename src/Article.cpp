@@ -1,4 +1,4 @@
-#include <Article.h>
+#include "Article.h"
 
 Article::Article(string n, string m, int s, int d, float p, char t) {
     name = n;

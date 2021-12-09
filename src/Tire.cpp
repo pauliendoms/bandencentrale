@@ -1,6 +1,12 @@
-#include <Tire.h>
+#include "Tire.h"
 
 Tire::Tire(string n, string m, int s, int d, float p, char t, int w, int h, string i, char se) {
+    name = n;
+    manufacterer = m;
+    stock = s;
+    diameter = d;
+    price = p;
+    type = t;
     width = w;
     height = h;
     speedIndex = i;

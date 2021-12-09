@@ -1,5 +1,6 @@
-#include <Article.h>
-#include <Customer.h>
+#pragma once
+#include "Article.h"
+#include "Customer.h"
 #include <vector>
 
 class TireCenter {

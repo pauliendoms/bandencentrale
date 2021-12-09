@@ -1,4 +1,5 @@
-#include <Article.h>
+#pragma once
+#include "Article.h"
 
 class Tire: public Article {
     public:

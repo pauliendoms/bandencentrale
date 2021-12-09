@@ -1,3 +1,5 @@
+#pragma once
+
 class Customer {
     public:
         Customer(string, string, char);

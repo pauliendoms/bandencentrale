@@ -1,5 +1,6 @@
-#include <Customer.h>
-#include <Article.h>
+#pragma once
+#include "Customer.h"
+#include "Article.h"
 #include <vector>
 
 class Invoice {

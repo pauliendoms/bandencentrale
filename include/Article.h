@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 using namespace std;
 
@@ -14,7 +15,7 @@ class Article {
         void setType(char);
 
         string getName();
-        string getManufacturer();
+        virtual string getManufacturer();
         int getStock();
         int getDiameter();
         float getPrice();

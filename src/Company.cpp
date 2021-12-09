@@ -1,4 +1,4 @@
-#include <Company.h>
+#include "Company.h"
 
 Company::Company(string v, int d) {
     vat = v;
