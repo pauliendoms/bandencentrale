@@ -3,7 +3,7 @@
 
 class Company: public Customer {
     public:
-        Company(string, int);
+        Company(string, string , char, string, int);
         ~Company();
         void setVat(string);
         void setVolumeDiscount(int);

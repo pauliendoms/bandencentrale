@@ -1,4 +1,4 @@
-#include "Article.h"
+#include "../include/Article.h"
 
 Article::Article(string n, string m, int s, int d, float p, char t) {
     name = n;
@@ -9,7 +9,7 @@ Article::Article(string n, string m, int s, int d, float p, char t) {
     type = t;
 }
 Article::~Article() {}
-void setName(string n) {
+void Article::setName(string n) {
     name = n;
 }
 void Article::setManufacturer(string m) {

@@ -2,7 +2,7 @@
 
 Rim::Rim(string n, string m, int s, int d, float p, char t, bool a, string c, int w) {
     name = n;
-    manufacterer = m;
+    manufacturer = m;
     stock = s;
     diameter = d;
     price = p;
@@ -22,7 +22,7 @@ void Rim::setWidth(int w) {
     width = w;
 }
 
-boolean Rim::getAluminium() {
+bool Rim::getAluminium() {
     return aluminium;
 }
 

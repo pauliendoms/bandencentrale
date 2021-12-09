@@ -1,6 +1,8 @@
-#include "Company.h"
+#include "../include/Company.h"
 
-Company::Company(string v, int d) {
+Company::Company(string n, string a, string v, int d) {
+    name = n;
+    address = a;
     vat = v;
     volumeDiscount = d;
 }
