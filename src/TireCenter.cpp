@@ -33,5 +33,6 @@ vector<Customer> TireCenter::getCustomers() {
 }
 
 void TireCenter::addCustomer(Customer customer) {
+    cout << "Ik voeg een customer toe" << endl;
     customers.push_back(customer);
 }

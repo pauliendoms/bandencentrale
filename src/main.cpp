@@ -24,20 +24,23 @@ void article_functions(string);
 
 int main() {
     string user;
-    int keuze;
+    int keuze = 0;
 
     user = login();
-    keuze = menu(user);
+    while (keuze < 6) {
+        keuze = menu(user);
 
-    switch(keuze) {
-        case 1:
-            customer_functions(user);
-            break;
-        case 2:
-            break;
-        case 3:
-            break;
+        switch(keuze) {
+            case 1:
+                customer_functions(user);
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
     }
+    
 
 }
 
@@ -50,7 +53,7 @@ string login() {
 }
 
 int menu(string user) {
-    int keuze;
+    int k;
 
     cout << "Menu: " << endl;
     cout << "1. Customers" << endl;
@@ -58,14 +61,17 @@ int menu(string user) {
     cout << "3. Update Stock" << endl;
     cout << "4. Invoices" << endl;
     cout << "5. Articles" << endl;
+    cout << "6. Stop" << endl;
     
     ENTER;
-    cin >> keuze;
+    cin >> k;
     ENTER;
-    return keuze;
+    return k;
 }
 
 void customer_functions(string user) {
+    string n; string a; char t; string v; int d;
+
     int keuze;
     cout << "1. Search Customer" << endl;
     cout << "2. Add Customer" << endl;
@@ -79,19 +85,25 @@ void customer_functions(string user) {
 
     switch(keuze) {
         case 1:
+            cout << "zoeken ..." << endl;
+            customers = tirecenter.getCustomers();
+            for (int i = 0; i < size(customers); i++) {
+                cout << customers[i].getName() << endl;
+            }
             break;
         case 2:
-            Customer customer;
-            string n; string a; char t; string v; int d;
             cout << "Enter customer name: " << endl;
             cin >> n;
+            cout << n << endl;
             cout << "Enter customer address: " << endl;
             cin >> a;
-            cout << "Enter customer type: " << endl;
+            cin.ignore();
+            cout << "Enter customer type: ";
             cin >> t;
+            ENTER;
             
             if (t == 'p') {
-                customer = Customer(n, a, t);
+                Customer customer = Customer(n, a, t);
                 tirecenter.addCustomer(customer);
             } else if (t == 'c') {
                 cout << "Enter the company VAT: " << endl;
@@ -99,7 +111,7 @@ void customer_functions(string user) {
                 cout << "Enter the volume discount: " << endl;
                 cin >> d;
                 
-                customer = Company(n, a, t, v, d);
+                Customer customer = Company(n, a, t, v, d);
             }
             break;
         case 3:

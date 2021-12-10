@@ -1,10 +1,8 @@
 #include "Customer.h"
 
-Customer::Customer(string n, string a, char t) {
-    name = n;
-    address = a;
-    type = t;
-}
+Customer::Customer(string n, string a, char t)
+    :name(n), address(a), type(t) {}
+
 Customer::~Customer() {}
 void Customer::setName(string n) {
     name = n;
