@@ -33,8 +33,32 @@ vector<Customer> TireCenter::getCustomers() {
     return customers;
 }
 
-void TireCenter::addCustomer(Customer customer) {
-    customers.push_back(customer);
+void TireCenter::addCustomer() {
+    string n; string a; char t; string v; int d;
+
+    cout << "Enter customer name: " << endl;
+    cin >> n;
+    cout << n << endl;
+    cout << "Enter customer address: " << endl;
+    cin >> a;
+    cin.ignore();
+    cout << "Enter customer type: ";
+    cin >> t;
+    ENTER;
+
+    if (t == 'p') {
+        Customer customer = Customer(n, a, t);
+        customers.push_back(customer);
+    } else if (t == 'c') {
+        cout << "Enter the company VAT: " << endl;
+        cin >> v;
+        cout << "Enter the volume discount: " << endl;
+        cin >> d;
+                
+        Customer customer = Company(n, a, t, v, d);
+        customers.push_back(customer);
+    }   
+
     cout << "Customer added" << endl;
     ENTER;
 }
@@ -48,4 +72,8 @@ void TireCenter::listCustomers() {
 
 void TireCenter::deleteCustomer(int id) {
     customers.erase(customers.begin() + (id-1));
+}
+
+void TireCenter::changeCustomer(int id) {
+    // 
 }

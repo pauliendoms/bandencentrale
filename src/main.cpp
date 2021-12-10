@@ -70,7 +70,6 @@ int menu(string user) {
 }
 
 void customer_functions(string user) {
-    string n; string a; char t; string v; int d;
 
     int keuze;
     cout << "1. Search Customer" << endl;
@@ -88,30 +87,13 @@ void customer_functions(string user) {
             tirecenter.listCustomers();
             break;
         case 2:
-            cout << "Enter customer name: " << endl;
-            cin >> n;
-            cout << n << endl;
-            cout << "Enter customer address: " << endl;
-            cin >> a;
-            cin.ignore();
-            cout << "Enter customer type: ";
-            cin >> t;
-            ENTER;
-            
-            if (t == 'p') {
-                Customer customer = Customer(n, a, t);
-                tirecenter.addCustomer(customer);
-            } else if (t == 'c') {
-                cout << "Enter the company VAT: " << endl;
-                cin >> v;
-                cout << "Enter the volume discount: " << endl;
-                cin >> d;
-                
-                Customer customer = Company(n, a, t, v, d);
-                tirecenter.addCustomer(customer);
-            }
+            tirecenter.addCustomer();
             break;
         case 3:
+            tirecenter.listCustomers();
+            cout << "Enter the id of the customer you want to edit: " << endl;
+            cin >> keuze;
+
             break;
         case 4:
             if (user != ADMIN) {

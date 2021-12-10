@@ -1,6 +1,7 @@
 #pragma once
 #include "Article.h"
 #include "Customer.h"
+#include "Company.h"
 #include <vector>
 
 class TireCenter {
@@ -18,9 +19,10 @@ class TireCenter {
         vector<Article> getArticles();
         vector<Customer> getCustomers();
 
-        void addCustomer(Customer customer);
+        void addCustomer();
         void listCustomers();
         void deleteCustomer(int);
+        void changeCustomer(int);
     private:
         string name;
         string address;
