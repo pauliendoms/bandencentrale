@@ -1,4 +1,5 @@
 #include "TireCenter.h"
+#define ENTER cout << "" << endl
 
 TireCenter::TireCenter(string n, string ad, vector<Article> ar, vector<Customer> c) {
     name = n;
@@ -33,6 +34,18 @@ vector<Customer> TireCenter::getCustomers() {
 }
 
 void TireCenter::addCustomer(Customer customer) {
-    cout << "Ik voeg een customer toe" << endl;
     customers.push_back(customer);
+    cout << "Customer added" << endl;
+    ENTER;
+}
+
+void TireCenter::listCustomers() {
+    for (int i = 0; i < size(customers); i++) {
+        cout << to_string(i+1) << " " << customers[i].getName() << endl;
+    }
+    ENTER;
+}
+
+void TireCenter::deleteCustomer(int id) {
+    customers.erase(customers.begin() + (id-1));
 }

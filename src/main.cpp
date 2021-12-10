@@ -85,11 +85,7 @@ void customer_functions(string user) {
 
     switch(keuze) {
         case 1:
-            cout << "zoeken ..." << endl;
-            customers = tirecenter.getCustomers();
-            for (int i = 0; i < size(customers); i++) {
-                cout << customers[i].getName() << endl;
-            }
+            tirecenter.listCustomers();
             break;
         case 2:
             cout << "Enter customer name: " << endl;
@@ -112,6 +108,7 @@ void customer_functions(string user) {
                 cin >> d;
                 
                 Customer customer = Company(n, a, t, v, d);
+                tirecenter.addCustomer(customer);
             }
             break;
         case 3:
@@ -120,6 +117,10 @@ void customer_functions(string user) {
             if (user != ADMIN) {
                 keuze = 0;
             } else {
+                tirecenter.listCustomers();
+                cout << "Enter the id of the customer you want to delete: " << endl;
+                cin >> keuze;
+                tirecenter.deleteCustomer(keuze);
                 break;
             }
         default:
