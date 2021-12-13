@@ -1,4 +1,6 @@
 #include "Customer.h"
+#include <iostream>
+using namespace std;
 
 Customer::Customer(string n, string a, char t)
     :name(n), address(a), type(t) {}
@@ -21,4 +23,10 @@ string Customer::getAddress() {
 }
 char Customer::getType() {
     return type;
+}
+
+void Customer::print() {
+    cout << "Name: " << name << endl;
+    cout << "Address: " << address << endl;
+    cout << "Type: Private" << endl;
 }

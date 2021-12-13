@@ -1,4 +1,7 @@
 #include "Company.h"
+#include <iostream>
+using namespace std;
+
 Company::Company(string n, string a, char t, string v, int d)
     :Customer(n, a, t), vat(v), volumeDiscount(d) {}
 /*
@@ -21,4 +24,12 @@ string Company::getVat() {
 }
 int Company::getVolumeDiscount() {
     return volumeDiscount;
+}
+
+void Company::print() {
+    cout << "Name: " << getName() << endl;
+    cout << "Address: " << getAddress() << endl;
+    cout << "Type: Company" << endl;
+    cout << "VAT: " << vat << endl;
+    cout << "Volume Discount: " << volumeDiscount << endl;
 }

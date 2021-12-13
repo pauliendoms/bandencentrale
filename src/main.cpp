@@ -13,7 +13,7 @@
 using namespace std;
 
 vector<Article> articles;
-vector<Customer> customers;
+vector<Customer*> customers;
 
 TireCenter tirecenter = TireCenter("BadYear", "Bandenstraat 14, Brussel", articles, customers);
 
@@ -93,6 +93,9 @@ void customer_functions(string user) {
             tirecenter.listCustomers();
             cout << "Enter the id of the customer you want to edit: " << endl;
             cin >> keuze;
+            ENTER;
+
+            tirecenter.changeCustomer(keuze);
 
             break;
         case 4:

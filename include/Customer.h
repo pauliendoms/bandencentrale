@@ -5,7 +5,7 @@ using namespace std;
 class Customer {
     public:
         Customer(string, string, char);
-        ~Customer();
+        virtual ~Customer();
         
         void setName(string);
         void setAddress(string);
@@ -14,6 +14,8 @@ class Customer {
         string getName();
         string getAddress();
         char getType();
+
+        virtual void print();
     private:
         string name;
         string address;

@@ -9,6 +9,8 @@ class Company: public Customer {
         void setVolumeDiscount(int);
         string getVat();
         int getVolumeDiscount();
+
+        void print() override;
     private:
         string vat;
         int volumeDiscount;

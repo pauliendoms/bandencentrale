@@ -6,18 +6,18 @@
 
 class TireCenter {
     public:
-        TireCenter(string, string, vector<Article>, vector<Customer>);
+        TireCenter(string, string, vector<Article>, vector<Customer*>);
         ~TireCenter();
 
         void setName(string);
         void setAddress(string);
         void setArticles(vector<Article>);
-        void setCustomers(vector<Customer>);
+        void setCustomers(vector<Customer*>);
 
         string getName();
         string getAddress();
         vector<Article> getArticles();
-        vector<Customer> getCustomers();
+        vector<Customer*> getCustomers();
 
         void addCustomer();
         void listCustomers();
@@ -27,5 +27,5 @@ class TireCenter {
         string name;
         string address;
         vector<Article> articles;
-        vector<Customer> customers;
+        vector<Customer*> customers;
 };
