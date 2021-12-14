@@ -24,6 +24,7 @@ class TireCenter {
         void deleteCustomer(int);
         void changeCustomer(int);
         void searchCustomer(string);
+        int customerIndex(Customer*);
     private:
         string name;
         string address;

@@ -72,7 +72,7 @@ void TireCenter::addCustomer() {
 
 void TireCenter::listCustomers(vector<Customer*> list) {
     for (int i = 0; i < size(list); i++) {
-        cout << to_string(i+1) << " " << list[i]->getName() << endl;
+        cout << to_string(customerIndex(list[i])+1) << " " << list[i]->getName() << endl;
     }
     ENTER;
 }
@@ -144,6 +144,7 @@ void TireCenter::changeCustomer(int id) {
 void TireCenter::searchCustomer(string zoekterm) {
     string name;
     vector<Customer*> results;
+    int index;
 
     // bron: https://stackoverflow.com/questions/313970/how-to-convert-an-instance-of-stdstring-to-lower-case
     transform(zoekterm.begin(), zoekterm.end(), zoekterm.begin(),
@@ -165,4 +166,22 @@ void TireCenter::searchCustomer(string zoekterm) {
     }
 
     listCustomers(results);
+
+    cout << "Enter index of customer you want to view (0 to cancel): " << endl;
+    cin >> index;
+
+    if (index != 0) {
+        ENTER;
+        customers[index-1]->print();
+        ENTER;
+    }
+}
+
+int TireCenter::customerIndex(Customer* cust) {
+    // bron: https://www.geeksforgeeks.org/how-to-find-index-of-a-given-element-in-a-vector-in-cpp/
+    auto i = find(customers.begin(), customers.end(), cust);
+
+    int index = i - customers.begin();
+
+    return index;  
 }
