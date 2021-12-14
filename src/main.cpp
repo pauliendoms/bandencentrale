@@ -70,8 +70,9 @@ int menu(string user) {
 }
 
 void customer_functions(string user) {
-
+    string query;
     int keuze;
+
     cout << "1. Search Customer" << endl;
     cout << "2. Add Customer" << endl;
     cout << "3. Change Customer" << endl;
@@ -84,13 +85,15 @@ void customer_functions(string user) {
 
     switch(keuze) {
         case 1:
-            tirecenter.listCustomers();
+            cout << "Enter your search query (0 to show all): " << endl;
+            cin >> query;
+            tirecenter.searchCustomer(query);
             break;
         case 2:
             tirecenter.addCustomer();
             break;
         case 3:
-            tirecenter.listCustomers();
+            tirecenter.listCustomers(tirecenter.getCustomers());
             cout << "Enter the id of the customer you want to edit: " << endl;
             cin >> keuze;
             ENTER;
@@ -102,7 +105,7 @@ void customer_functions(string user) {
             if (user != ADMIN) {
                 keuze = 0;
             } else {
-                tirecenter.listCustomers();
+                tirecenter.listCustomers(tirecenter.getCustomers());
                 cout << "Enter the id of the customer you want to delete: " << endl;
                 cin >> keuze;
                 tirecenter.deleteCustomer(keuze);

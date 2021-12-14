@@ -9,3 +9,5 @@
 - In de destructor van uw tirecenter moeten al uw articles, invoices en customers gedeleted worden!
 
 -Search Customer!
+
+- Oplossing voor als customer type fout wordt ingegeven!

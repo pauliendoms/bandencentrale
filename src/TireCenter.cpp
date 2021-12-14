@@ -1,4 +1,6 @@
 #include "TireCenter.h"
+#include <algorithm>
+using namespace std;
 
 #define ENTER cout << "" << endl
 
@@ -68,9 +70,9 @@ void TireCenter::addCustomer() {
     ENTER;
 }
 
-void TireCenter::listCustomers() {
-    for (int i = 0; i < size(customers); i++) {
-        cout << to_string(i+1) << " " << customers[i]->getName() << endl;
+void TireCenter::listCustomers(vector<Customer*> list) {
+    for (int i = 0; i < size(list); i++) {
+        cout << to_string(i+1) << " " << list[i]->getName() << endl;
     }
     ENTER;
 }
@@ -137,4 +139,30 @@ void TireCenter::changeCustomer(int id) {
     cout << "Customer added" << endl;
     
     ENTER;
+}
+
+void TireCenter::searchCustomer(string zoekterm) {
+    string name;
+    vector<Customer*> results;
+
+    // bron: https://stackoverflow.com/questions/313970/how-to-convert-an-instance-of-stdstring-to-lower-case
+    transform(zoekterm.begin(), zoekterm.end(), zoekterm.begin(),
+    [](unsigned char c){ return tolower(c); });
+
+    if (zoekterm == "0") {
+        listCustomers(customers);
+    } else {
+        for (int i = 0; i < size(customers); i++) {
+            name = customers[i]->getName();
+
+            transform(name.begin(), name.end(), name.begin(),
+            [](unsigned char c){ return tolower(c); });
+
+            if (name.find(zoekterm) != string::npos) {
+                results.push_back(customers[i]);
+            }
+        }
+    }
+
+    listCustomers(results);
 }

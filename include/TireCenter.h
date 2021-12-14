@@ -20,9 +20,10 @@ class TireCenter {
         vector<Customer*> getCustomers();
 
         void addCustomer();
-        void listCustomers();
+        void listCustomers(vector<Customer*>);
         void deleteCustomer(int);
         void changeCustomer(int);
+        void searchCustomer(string);
     private:
         string name;
         string address;
