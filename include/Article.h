@@ -20,6 +20,8 @@ class Article {
         int getDiameter();
         float getPrice();
         char getType();
+
+        virtual void print() = 0;
     private:
         string name;
         string manufacturer;

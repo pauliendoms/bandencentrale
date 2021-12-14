@@ -11,6 +11,8 @@ class Rim: public Article {
         bool getAluminium();
         string getColor();
         int getWidth();
+
+        void print() override;
     private:
         bool aluminium;
         string color;

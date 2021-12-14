@@ -15,6 +15,8 @@ class Tire: public Article {
         int getHeight();
         string getSpeedIndex();
         char getSeason();
+
+        void print() override;
     private:
         int width;
         int height;

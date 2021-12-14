@@ -12,7 +12,7 @@
 #define ENTER cout << "" << endl
 using namespace std;
 
-vector<Article> articles;
+vector<Article*> articles;
 vector<Customer*> customers;
 
 TireCenter tirecenter = TireCenter("BadYear", "Bandenstraat 14, Brussel", articles, customers);

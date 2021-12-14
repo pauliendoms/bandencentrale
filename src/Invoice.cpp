@@ -1,6 +1,6 @@
 #include "Invoice.h"
 
-Invoice::Invoice(Customer c, vector<Article> a, float p, int d)
+Invoice::Invoice(Customer c, vector<Article*> a, float p, int d)
     :customer(c), articles(a), price(p), discount(d) {}
 
 /*
@@ -14,7 +14,7 @@ Invoice::~Invoice() {}
 void Invoice::setCustomer(Customer c) {
     customer = c;
 }
-void Invoice::setArticles(vector<Article> a) {
+void Invoice::setArticles(vector<Article*> a) {
     articles = a;
 }
 void Invoice::setPrice(float p) {
@@ -26,7 +26,7 @@ void Invoice::setDiscount(int d) {
 Customer Invoice::getCustomer() {
     return customer;
 }
-vector<Article> Invoice::getArticles() {
+vector<Article*> Invoice::getArticles() {
     return articles;
 }
 float Invoice::getPrice() {
