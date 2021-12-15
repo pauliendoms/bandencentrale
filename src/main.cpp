@@ -38,6 +38,11 @@ int main() {
                 break;
             case 3:
                 break;
+            case 4:
+                break;
+            case 5:
+                article_functions(user);
+                break;
         }
     }
     
@@ -93,7 +98,6 @@ void customer_functions(string user) {
             tirecenter.addCustomer();
             break;
         case 3:
-            tirecenter.listCustomers(tirecenter.getCustomers());
             cout << "Enter the id of the customer you want to edit: " << endl;
             cin >> keuze;
             ENTER;
@@ -105,7 +109,6 @@ void customer_functions(string user) {
             if (user != ADMIN) {
                 keuze = 0;
             } else {
-                tirecenter.listCustomers(tirecenter.getCustomers());
                 cout << "Enter the id of the customer you want to delete: " << endl;
                 cin >> keuze;
                 tirecenter.deleteCustomer(keuze);
@@ -119,6 +122,8 @@ void customer_functions(string user) {
 }
 
 void article_functions(string user) {
+    string query;
+
     int keuze;
     cout << "1. Search Article" << endl;
     cout << "2. Change Article" << endl;
@@ -132,19 +137,34 @@ void article_functions(string user) {
 
     switch(keuze) {
         case 1:
+            cout << "Enter query to search article by name (0 to show all): " << endl;
+            cin >> query;
+
+            tirecenter.searchArticle(query);
             break;
         case 2:
+            cout << "Enter the id of the article you want to change: " << endl;
+            cin >> keuze;
+            ENTER;
+
+            tirecenter.changeArticle(keuze);
             break;
         case 3:
             if (user != ADMIN) {
                 keuze = 0;
             } else {
+                tirecenter.addArticle();
                 break;
             }
         case 4:
             if (user != ADMIN) {
                 keuze = 0;
             } else {
+                cout << "Enter the id of the article you want to delete: " << endl;
+                cin >> keuze;
+                ENTER;
+
+                tirecenter.deleteCustomer(keuze);
                 break;
             }
         default:

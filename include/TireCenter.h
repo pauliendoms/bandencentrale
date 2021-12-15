@@ -27,6 +27,11 @@ class TireCenter {
         int customerIndex(Customer*);
 
         void addArticle();
+        void listArticles(vector<Article*>);
+        int articleIndex(Article*);
+        void deleteArticle(int);
+        void changeArticle(int);
+        void searchArticle(string);
     private:
         string name;
         string address;

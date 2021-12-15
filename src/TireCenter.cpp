@@ -4,7 +4,7 @@
 #include "Tire.h"
 using namespace std;
 
-#define ENTER cout << "" << endl
+#define ENTER cout << "" << endl;
 
 TireCenter::TireCenter(string n, string ad, vector<Article*> ar, vector<Customer*> c) {
     name = n;
@@ -46,7 +46,7 @@ void TireCenter::addCustomer() {
     string n; string a; char t; string v; int d;
 
     cout << "Enter customer name: " << endl;
-    cin >> n;
+    getline(cin, n);
     cout << "Enter customer address: " << endl;
     cin >> a;
     cin.ignore();
@@ -94,7 +94,7 @@ void TireCenter::changeCustomer(int id) {
     ENTER;
 
     cout << "Enter customer name: " << endl;
-    cin >> n;
+    getline(cin, n);
     if (n != "x") {
         cust->setName(n);
     }
@@ -190,13 +190,14 @@ int TireCenter::customerIndex(Customer* cust) {
 
 void TireCenter::addArticle() {
     string n; string m; int s; int d; float p; char t;
-    bool a; string c; int w;
+    bool a; string c; int w; string boolean;
     int h; string i; char se;
     Article* article;
+    cin.ignore();
     cout << "Enter the name: " << endl;
-    cin >> n;
+    getline(cin, n);
     cout << "Enter manufacturer: " << endl;
-    cin >> m;
+    getline(cin, m);
     cout << "Enter stock: " << endl;
     cin >> s;
     cout << "Enter diameter: " << endl;
@@ -208,7 +209,8 @@ void TireCenter::addArticle() {
 
     if (t == 'r') {
         cout << "Enter aluminium (true or false): " << endl;
-        cin >> a;
+        cin >> boolean;
+        if (boolean == "true") {a = true;} else if (boolean == "false") {a=false;};
         cout << "Enter color: " << endl;
         cin >> c;
         cout << "Enter width: " << endl;
@@ -229,4 +231,188 @@ void TireCenter::addArticle() {
     }
 
     articles.push_back(article);
+}
+
+void TireCenter::listArticles(vector<Article*> list) {
+    for (int i = 0; i < size(list); i++) {
+        cout << to_string(articleIndex(list[i])+1) << " " << list[i]->getName() << endl;
+    }
+    ENTER;
+}
+
+int TireCenter::articleIndex(Article* art) {
+    auto i = find(articles.begin(), articles.end(), art);
+
+    int index = i - articles.begin();
+
+    return index;
+}
+
+void TireCenter::deleteArticle(int id) {
+    articles.erase(articles.begin() + (id -1));
+    delete articles[id-1];
+}
+
+void TireCenter::changeArticle(int id) {
+    string n; string m; int s; int d; float p; char t;
+    int w; int h; string i; char se;
+    bool a; string c;
+    char x;  
+    Article* art = articles[id-1];
+    art->print();
+    ENTER;
+
+    cout << "Enter x if you don't want to make a change." << endl;
+    ENTER;
+
+    cout << "Enter article name: " << endl;
+    getline(cin, n);
+    if (n != "x") {
+        art->setName(n);
+    }
+
+    cout << "Enter manufacturer: " << endl;
+    cin >> m;
+    cin.ignore();
+
+    if (m != "x") {
+        art->setManufacturer(m);
+    }
+
+    cout << "Enter stock: ";
+    cin >> s;
+
+    if (s != 'x') {
+        art->setStock(s);
+    }
+
+    cout << "Enter diameter: ";
+    cin >> d;
+
+    if (d != 'x') {
+        art->setDiameter(d);
+    }
+
+    cout << "Enter price: ";
+    cin >> p;
+
+    if (p != 'x') {
+        art->setPrice(p);
+    }
+
+    cout << "Enter type: ";
+    cin >> t;
+
+    if (s != 'x') {
+        art->setType(t);
+    }
+
+    ENTER;
+
+    if (art->getType() == 't') {
+        Tire* tire = dynamic_cast<Tire*>(art);
+        cout << "Enter width: " << endl;
+        cin >> x;
+        if (x != 'x') {
+            w = int(x);
+            tire->setWidth(w);
+        }
+        cout << "Enter height: " << endl;
+        cin >> x;
+        
+        if (x != 'x') {
+            h = int(x);
+            tire->setHeight(h);
+        } 
+
+        cout << "Enter speed Index: " << endl;
+        cin >> i;
+
+        if (i != "x") {
+            tire->setSpeedIndex(i);
+        }
+
+        cout << "Enter season: " << endl;
+        cin >> se;
+
+        if (se != 'x') {
+            tire->setSeason(se);
+        }
+
+        ENTER;
+
+    } else if (art->getType() == 'r') {
+        Rim* rim = dynamic_cast<Rim*>(art);
+        
+        cout << "Enter aluminium (true or false): " << endl;
+        cin >> a;
+        if (a == true || a == false) {
+            rim->setAluminium(a);
+        }
+
+        cout << "Enter color: " << endl;
+        cin >> c;
+        
+        if (c != "x") {
+            rim->setColor(c);
+        }
+
+        cout << "Enter width: " << endl;
+        cin >> w;
+        if (w != 'x') {
+            rim->setWidth(w);
+        }
+    }
+
+    cout << "Article added" << endl;
+    
+    ENTER;
+}
+
+void TireCenter::searchArticle(string zoekterm) {
+    string name;
+    vector<Article*> results;
+    int index;
+    char x;
+
+    transform(zoekterm.begin(), zoekterm.end(), zoekterm.begin(),
+    [](unsigned char c){ return tolower(c); });
+    
+    if (zoekterm == "0") {
+        listArticles(articles);
+    } else {
+        for (int i = 0; i < size(articles); i++) {
+            name = articles[i]->getName();
+
+            transform(name.begin(), name.end(), name.begin(),
+            [](unsigned char c){ return tolower(c); });
+
+            if (name.find(zoekterm) != string::npos) {
+                results.push_back(articles[i]);
+            }
+        }
+    }
+
+    listArticles(results);
+
+    cout << "Apply filter, enter 'r' for Rim and 't' for Tire, 'x' for no filter: " << endl;
+    cin >> x;
+
+    for (int i = 0; i < size(results); i++) {
+        if (results[i]->getType() != x && results[i]->getType() != 'x') {
+            results.erase(results.begin() + i);
+        }
+    }
+
+    listArticles(results);
+
+    cout << "Enter index of article you want to view (0 to cancel): " << endl;
+    cin >> index;
+
+    if (index != 0) {
+        ENTER;
+        articles[index-1]->print();
+        ENTER;
+    }
+
 }

@@ -5,6 +5,10 @@ Rim::Rim(string n, string m, int s, int d, float p, char t, bool a, string c, in
 
 Rim::~Rim() {}
 
+void Rim::setAluminium(bool a) {
+    aluminium = a;
+}
+
 void Rim::setColor(string c) {
     color = c;
 }
