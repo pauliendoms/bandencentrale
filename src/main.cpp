@@ -18,7 +18,7 @@ vector<Customer*> customers;
 TireCenter tirecenter = TireCenter("BadYear", "Bandenstraat 14, Brussel", articles, customers);
 
 string login();
-int menu(string);
+int menu();
 void customer_functions(string);
 void article_functions(string);
 
@@ -28,7 +28,8 @@ int main() {
 
     user = login();
     while (keuze < 6) {
-        keuze = menu(user);
+        cin.ignore();
+        keuze = menu();
 
         switch(keuze) {
             case 1:
@@ -57,7 +58,7 @@ string login() {
     return login;
 }
 
-int menu(string user) {
+int menu() {
     int k;
 
     cout << "Menu: " << endl;
@@ -164,7 +165,7 @@ void article_functions(string user) {
                 cin >> keuze;
                 ENTER;
 
-                tirecenter.deleteCustomer(keuze);
+                tirecenter.deleteArticle(keuze);
                 break;
             }
         default:

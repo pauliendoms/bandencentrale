@@ -256,7 +256,7 @@ void TireCenter::deleteArticle(int id) {
 void TireCenter::changeArticle(int id) {
     string n; string m; int s; int d; float p; char t;
     int w; int h; string i; char se;
-    bool a; string c;
+    string a; string c;
     char x;  
     Article* art = articles[id-1];
     art->print();
@@ -264,7 +264,7 @@ void TireCenter::changeArticle(int id) {
 
     cout << "Enter x if you don't want to make a change." << endl;
     ENTER;
-
+    cin.ignore();
     cout << "Enter article name: " << endl;
     getline(cin, n);
     if (n != "x") {
@@ -272,38 +272,40 @@ void TireCenter::changeArticle(int id) {
     }
 
     cout << "Enter manufacturer: " << endl;
-    cin >> m;
-    cin.ignore();
+    getline(cin, m);
 
     if (m != "x") {
         art->setManufacturer(m);
     }
 
-    cout << "Enter stock: ";
-    cin >> s;
+    cout << "Enter stock: " << endl;
+    cin >> x;
 
-    if (s != 'x') {
+    if (x != 'x') {
+        s = int(x);
         art->setStock(s);
     }
 
-    cout << "Enter diameter: ";
-    cin >> d;
+    cout << "Enter diameter: " << endl;
+    cin >> x;
 
-    if (d != 'x') {
+    if (x != 'x') {
+        d = int(x);
         art->setDiameter(d);
     }
 
-    cout << "Enter price: ";
-    cin >> p;
+    cout << "Enter price: " << endl;
+    cin >> n;
 
-    if (p != 'x') {
+    if (n != "x") {
+        p = stof(n);
         art->setPrice(p);
     }
 
-    cout << "Enter type: ";
+    cout << "Enter type: " << endl;
     cin >> t;
 
-    if (s != 'x') {
+    if (t != 'x') {
         art->setType(t);
     }
 
@@ -346,8 +348,10 @@ void TireCenter::changeArticle(int id) {
         
         cout << "Enter aluminium (true or false): " << endl;
         cin >> a;
-        if (a == true || a == false) {
-            rim->setAluminium(a);
+        if (a == "true") {
+            rim->setAluminium(true);
+        } else if (a == "false") {
+            rim->setAluminium(false);
         }
 
         cout << "Enter color: " << endl;
@@ -358,8 +362,9 @@ void TireCenter::changeArticle(int id) {
         }
 
         cout << "Enter width: " << endl;
-        cin >> w;
-        if (w != 'x') {
+        cin >> x;
+        if (x != 'x') {
+            w = int(x);
             rim->setWidth(w);
         }
     }
@@ -379,7 +384,9 @@ void TireCenter::searchArticle(string zoekterm) {
     [](unsigned char c){ return tolower(c); });
     
     if (zoekterm == "0") {
-        listArticles(articles);
+        for (int i = 0; i < size(articles); i++) {
+            results.push_back(articles[i]);
+        }
     } else {
         for (int i = 0; i < size(articles); i++) {
             name = articles[i]->getName();
@@ -398,9 +405,9 @@ void TireCenter::searchArticle(string zoekterm) {
     cout << "Apply filter, enter 'r' for Rim and 't' for Tire, 'x' for no filter: " << endl;
     cin >> x;
 
-    for (int i = 0; i < size(results); i++) {
-        if (results[i]->getType() != x && results[i]->getType() != 'x') {
-            results.erase(results.begin() + i);
+    for (int j = 0; j < size(results); j++) {
+        if (results[j]->getType() != x && x != 'x') {
+            results.erase(results.begin() + j);
         }
     }
 
