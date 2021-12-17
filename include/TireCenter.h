@@ -32,6 +32,8 @@ class TireCenter {
         void deleteArticle(int);
         void changeArticle(int);
         void searchArticle(string);
+
+        void updateStock(int);
     private:
         string name;
         string address;

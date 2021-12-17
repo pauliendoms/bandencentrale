@@ -25,6 +25,7 @@ void article_functions(string);
 int main() {
     string user;
     int keuze = 0;
+    int id;
 
     user = login();
     while (keuze < 6) {
@@ -38,6 +39,9 @@ int main() {
             case 2:
                 break;
             case 3:
+                cout << "Enter the id of the article of which you want to update the stock: " << endl;
+                cin >> id;
+                tirecenter.updateStock(id);
                 break;
             case 4:
                 break;

@@ -375,6 +375,7 @@ void TireCenter::changeArticle(int id) {
 }
 
 void TireCenter::searchArticle(string zoekterm) {
+
     string name;
     vector<Article*> results;
     int index;
@@ -422,4 +423,13 @@ void TireCenter::searchArticle(string zoekterm) {
         ENTER;
     }
 
+}
+
+void TireCenter::updateStock(int id) {
+    int stock;
+
+    cout << "Enter updated amount of stock: " << endl;
+    cin >> stock;
+
+    articles[id-1]->setStock(stock);
 }
