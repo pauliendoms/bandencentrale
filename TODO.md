@@ -7,3 +7,5 @@
 - geen dubbele customers toelaten, of articles
 
 - Foute input moet ni nagekeken worden, we mogen ervan uitgaan dat alles juist wordt ingegeven
+
+- articles filteren op size!

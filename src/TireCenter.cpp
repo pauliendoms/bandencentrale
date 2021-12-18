@@ -6,11 +6,12 @@ using namespace std;
 
 #define ENTER cout << "" << endl;
 
-TireCenter::TireCenter(string n, string ad, vector<Article*> ar, vector<Customer*> c) {
+TireCenter::TireCenter(string n, string ad, vector<Article*> ar, vector<Customer*> c, vector<Invoice> i) {
     name = n;
     address = ad;
     articles = ar;
     customers = c;
+    invoices = i;
 }
 TireCenter::~TireCenter() {
     for (Customer* customer : this->customers) {
@@ -29,6 +30,9 @@ void TireCenter::setArticles(vector<Article*> a) {
 void TireCenter::setCustomers(vector<Customer*> c) {
     customers = c;
 }
+void TireCenter::setInvoices(vector<Invoice> i) {
+    invoices = i;
+}
 string TireCenter::getName() {
     return name;
 }
@@ -40,6 +44,9 @@ vector<Article*> TireCenter::getArticles() {
 }
 vector<Customer*> TireCenter::getCustomers() {
     return customers;
+}
+vector<Invoice> TireCenter::getInvoices() {
+    return invoices;
 }
 
 void TireCenter::addCustomer() {
@@ -432,4 +439,106 @@ void TireCenter::updateStock(int id) {
     cin >> stock;
 
     articles[id-1]->setStock(stock);
+}
+
+void TireCenter::order() {
+    string query;
+    int customer_id;
+    int article_id;
+    int amount;
+    vector<Article*> article_list = {};
+    vector<int> amounts = {};
+    int keuze = 1;
+    bool check_order = true;
+
+    cout << "Use this search function to find the customer id." << endl;
+
+    cout << "Enter your search query (0 to show all): " << endl;
+    cin >> query;
+    searchCustomer(query);
+
+    cout << "Enter the customer id: " << endl;
+    cin >> customer_id;
+
+    while (keuze) {
+        cout << "Use this search function to find the article's id." << endl;
+
+        cout << "Enter query to search article by name (0 to show all): " << endl;
+        cin >> query;
+
+        searchArticle(query);
+
+        cout << "Enter the id of the article you want to add to the order: " << endl;
+        cin >> article_id;
+
+        article_list.push_back(articles[article_id - 1]);
+
+        cout << "Enter the amount of the article you want (tires = per 2; rims = per 4): " << endl;
+        cin >> amount;
+
+        amounts.push_back(amount);
+
+        cout << "Do you want to add another article? (1 for yes, 0 for no);" << endl;
+        cin >> keuze;
+    }
+
+    for (int j = 0; j < size(article_list); j++) {
+        if ((article_list[j]->getStock() - amounts[j]) < 0) {
+            check_order = false;
+        }
+    }
+
+    if (check_order) {
+        for (int i = 0; i < size(article_list); i++) {
+            article_list[i]->setStock(article_list[i]->getStock() - amounts[i]);
+        }
+
+        addInvoice(customer_id, article_list, amounts);
+    } else {
+        cout << "The order is cancelled, not enough items in stock for this order." << endl;
+    }
+
+
+
+}
+
+void TireCenter::addInvoice(int customer_id, vector<Article*> article_list, vector<int> amounts) {
+    float price = 0.0;
+    int discount;
+    char customer_type = customers[customer_id-1]->getType();
+    int sets = 0;
+    int banden_sets = 0;
+    int velgen_sets = 0;
+
+    for (int i = 0; i < size(article_list); i++) {
+        price += article_list[i]->getPrice() * amounts[i];
+    }
+
+    if (customer_type == 'c') {
+        for (int j = 0; j < size(amounts); j++) {
+            sets += amounts[j] / 4;
+        }
+        
+        // 10 procent korting per 10 sets
+        discount = 10 * (sets / 10);
+    } else {
+        // 5 procent korting voor een individueel set, 15% voor een set banden + velgen
+        for (int k = 0; k < size(article_list); k++) {
+            if (article_list[k]->getType() == 't') {
+                banden_sets += amounts[k] / 4;
+            } else {
+                velgen_sets += amounts[k] / 4;
+            }
+        }
+
+        if (banden_sets > velgen_sets) {
+            discount = (15 * ((banden_sets + velgen_sets) - (banden_sets - velgen_sets)) / 2) + (5 * (banden_sets - velgen_sets));
+        } else {
+            discount = (15 * ((banden_sets + velgen_sets) - (velgen_sets - banden_sets)) / 2) + (5 * (velgen_sets - banden_sets));
+        }
+    }
+
+    
+    
+    
 }

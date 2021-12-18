@@ -14,8 +14,9 @@ using namespace std;
 
 vector<Article*> articles;
 vector<Customer*> customers;
+vector<Invoice> invoices;
 
-TireCenter tirecenter = TireCenter("BadYear", "Bandenstraat 14, Brussel", articles, customers);
+TireCenter tirecenter = TireCenter("BadYear", "Bandenstraat 14, Brussel", articles, customers, invoices);
 
 string login();
 int menu();
