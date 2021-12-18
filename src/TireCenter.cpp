@@ -6,7 +6,7 @@ using namespace std;
 
 #define ENTER cout << "" << endl;
 
-TireCenter::TireCenter(string n, string ad, vector<Article*> ar, vector<Customer*> c, vector<Invoice> i) {
+TireCenter::TireCenter(string n, string ad, vector<Article*> ar, vector<Customer*> c, vector<Invoice*> i) {
     name = n;
     address = ad;
     articles = ar;
@@ -30,7 +30,7 @@ void TireCenter::setArticles(vector<Article*> a) {
 void TireCenter::setCustomers(vector<Customer*> c) {
     customers = c;
 }
-void TireCenter::setInvoices(vector<Invoice> i) {
+void TireCenter::setInvoices(vector<Invoice*> i) {
     invoices = i;
 }
 string TireCenter::getName() {
@@ -45,13 +45,14 @@ vector<Article*> TireCenter::getArticles() {
 vector<Customer*> TireCenter::getCustomers() {
     return customers;
 }
-vector<Invoice> TireCenter::getInvoices() {
+vector<Invoice*> TireCenter::getInvoices() {
     return invoices;
 }
 
 void TireCenter::addCustomer() {
     string n; string a; char t; string v; int d;
 
+    cin.ignore();
     cout << "Enter customer name: " << endl;
     getline(cin, n);
     cout << "Enter customer address: " << endl;
@@ -509,6 +510,8 @@ void TireCenter::addInvoice(int customer_id, vector<Article*> article_list, vect
     int sets = 0;
     int banden_sets = 0;
     int velgen_sets = 0;
+    vector<Article*> invoice_articles;
+    Customer* cust = customers[customer_id - 1]->copy();
 
     for (int i = 0; i < size(article_list); i++) {
         price += article_list[i]->getPrice() * amounts[i];
@@ -538,7 +541,44 @@ void TireCenter::addInvoice(int customer_id, vector<Article*> article_list, vect
         }
     }
 
-    
-    
+    for (int l = 0; l < size(article_list); l++) {
+        invoice_articles.push_back(article_list[l]->copy());
+    }
+
+    Invoice* inv = new Invoice(cust, invoice_articles, price, discount);
+
+    invoices.push_back(inv);
     
 }
+
+/*
+int TireCenter::invoiceIndex(Invoice* inv) {
+    auto i = find(invoices.begin(), invoices.end(), inv);
+
+    int index = i - invoices.begin();
+
+    return index;
+} */
+
+void TireCenter::searchInvoice() {
+    string query;
+    int customer_id;
+    
+    cout << "Use following search function to find the right customer id: " << endl;
+    ENTER;
+
+    cout << "Enter your search query (0 to show all): " << endl;
+    cin >> query;
+    searchCustomer(query);
+
+    cout << "Enter the customer id to see invoices from: " << endl;
+    cin >> customer_id;
+
+    for (int i = 0; i < size(invoices); i++) {
+        if (invoices[i]->getCustomer()->getName() == customers[customer_id - 1]->getName()) {
+            invoices[i]->print();
+        }
+    }
+            
+}
+

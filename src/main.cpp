@@ -14,7 +14,7 @@ using namespace std;
 
 vector<Article*> articles;
 vector<Customer*> customers;
-vector<Invoice> invoices;
+vector<Invoice*> invoices;
 
 TireCenter tirecenter = TireCenter("BadYear", "Bandenstraat 14, Brussel", articles, customers, invoices);
 
@@ -38,6 +38,7 @@ int main() {
                 customer_functions(user);
                 break;
             case 2:
+                tirecenter.order();
                 break;
             case 3:
                 cout << "Enter the id of the article of which you want to update the stock: " << endl;
@@ -45,6 +46,7 @@ int main() {
                 tirecenter.updateStock(id);
                 break;
             case 4:
+                tirecenter.searchInvoice();
                 break;
             case 5:
                 article_functions(user);

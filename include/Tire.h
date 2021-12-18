@@ -17,6 +17,7 @@ class Tire: public Article {
         char getSeason();
 
         void print() override;
+        Article* copy() override;
     private:
         int width;
         int height;

@@ -4,14 +4,7 @@ using namespace std;
 
 Company::Company(string n, string a, char t, string v, int d)
     :Customer(n, a, t), vat(v), volumeDiscount(d) {}
-/*
-Company::Company(string n, string a, char t, string v, int d) {
-    setName(n);
-    setAddress(a);
-    setType(t);
-    vat = v;
-    volumeDiscount = d;
-}*/
+
 Company::~Company() {}
 void Company::setVat(string v) {
     vat = v;
@@ -32,4 +25,9 @@ void Company::print() {
     cout << "Type: Company" << endl;
     cout << "VAT: " << vat << endl;
     cout << "Volume Discount: " << volumeDiscount << endl;
+}
+
+Customer* Company::copy() {
+    Customer* cust = new Company(getName(), getAddress(), getType(), getVat(), getVolumeDiscount());
+    return cust;
 }

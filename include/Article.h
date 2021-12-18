@@ -22,6 +22,7 @@ class Article {
         char getType();
 
         virtual void print() = 0;
+        virtual Article* copy() = 0;
     private:
         string name;
         string manufacturer;

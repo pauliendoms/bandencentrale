@@ -11,6 +11,7 @@ class Company: public Customer {
         int getVolumeDiscount();
 
         void print() override;
+        Customer* copy() override;
     private:
         string vat;
         int volumeDiscount;

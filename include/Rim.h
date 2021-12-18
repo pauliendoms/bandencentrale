@@ -13,6 +13,7 @@ class Rim: public Article {
         int getWidth();
 
         void print() override;
+        Article* copy() override;
     private:
         bool aluminium;
         string color;

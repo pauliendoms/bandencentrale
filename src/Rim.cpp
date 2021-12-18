@@ -40,3 +40,8 @@ void Rim::print() {
     cout << "Color: " << color << endl;
     cout << "Width: " << width << endl;
 }
+
+Article* Rim::copy() {
+    Article* art = new Rim(getName(), getManufacturer(), getStock(), getDiameter(), getPrice(), getType(), getAluminium(), getColor(), getWidth());
+    return art;
+}

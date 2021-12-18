@@ -30,3 +30,8 @@ void Customer::print() {
     cout << "Address: " << address << endl;
     cout << "Type: Private" << endl;
 }
+
+Customer* Customer::copy() {
+    Customer* cust = new Customer(getName(), getAddress(), getType());
+    return cust;
+}

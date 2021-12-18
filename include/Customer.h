@@ -16,6 +16,7 @@ class Customer {
         char getType();
 
         virtual void print();
+        virtual Customer* copy();
     private:
         string name;
         string address;
