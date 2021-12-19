@@ -603,7 +603,6 @@ void TireCenter::readArticles() {
     inArticleFile >> aantal;
     cout << aantal << endl;
     inArticleFile.ignore();
-    inArticleFile.seekg(2);
 
     for (int x = 0; x < aantal; x++) {
         
@@ -619,25 +618,22 @@ void TireCenter::readArticles() {
         cout << p << endl;
         inArticleFile >> t;
         cout << t << endl;
-        pos = inArticleFile.tellg();
-        inArticleFile.close();
-
         if (t == 't') {
             inArticleFile >> w;
             inArticleFile >> h;
             inArticleFile >> i;
             inArticleFile >> se;
-
+            inArticleFile.ignore();
             Article* art = new Tire(n, m, s, d, p, t, w, h, i, se);
             articles.push_back(art);
         } else if (t == 'r') {
-            ifstream inArticleFile("saves/articles.txt", ios::in);
-            inArticleFile.seekg(1);
             inArticleFile >> a;
             cout << a << endl;
-            inArticleFile >> c;
+            inArticleFile.ignore();
+            getline(inArticleFile,c);
             cout << c << endl;
             inArticleFile >> w;
+            inArticleFile.ignore();
             cout << w << endl;
 
             Article* art = new Rim(n, m, s, d, p, t, a, c, w);
