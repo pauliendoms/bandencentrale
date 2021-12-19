@@ -591,20 +591,37 @@ void TireCenter::readArticles() {
         cerr << "Problem opening file" << endl;
         exit(EXIT_FAILURE);
     }
+
+    cout << "File is opened." << endl;
     
     string n; string m; int s; int d; float p; char t;
     int w; int h; string i; char se;
     bool a; string c;
+    int pos;
 
-    while (!inArticleFile.eof()) {
-        getline(inArticleFile, n);
-        getline(inArticleFile, m);
-        inArticleFile >> s;
-        inArticleFile >> d;
-        inArticleFile >> p;
-        inArticleFile >> t;
+    int aantal;
+    inArticleFile >> aantal;
+    cout << aantal << endl;
+    inArticleFile.ignore();
+    inArticleFile.seekg(2);
+
+    for (int x = 0; x < aantal; x++) {
         
-    
+        getline(inArticleFile, n);
+        cout << n << endl;
+        getline(inArticleFile, m);
+        cout << m << endl;
+        inArticleFile >> s;
+        cout << s << endl;
+        inArticleFile >> d;
+        cout << d << endl;
+        inArticleFile >> p;
+        cout << p << endl;
+        inArticleFile >> t;
+        cout << t << endl;
+        pos = inArticleFile.tellg();
+        inArticleFile.close();
+
         if (t == 't') {
             inArticleFile >> w;
             inArticleFile >> h;
@@ -614,13 +631,18 @@ void TireCenter::readArticles() {
             Article* art = new Tire(n, m, s, d, p, t, w, h, i, se);
             articles.push_back(art);
         } else if (t == 'r') {
+            ifstream inArticleFile("saves/articles.txt", ios::in);
+            inArticleFile.seekg(1);
             inArticleFile >> a;
+            cout << a << endl;
             inArticleFile >> c;
+            cout << c << endl;
             inArticleFile >> w;
+            cout << w << endl;
 
             Article* art = new Rim(n, m, s, d, p, t, a, c, w);
             articles.push_back(art);
         }
-
     }
+    inArticleFile.close();
 }
