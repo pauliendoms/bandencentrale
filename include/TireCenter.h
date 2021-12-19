@@ -42,6 +42,8 @@ class TireCenter {
     
         // int invoiceIndex(Invoice*);
         void searchInvoice();
+
+        void readArticles();
     private:
         string name;
         string address;

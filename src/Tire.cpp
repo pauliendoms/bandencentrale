@@ -41,3 +41,8 @@ void Tire::print() {
     cout << "SpeedIndex: " << speedIndex << endl;
     cout << "Season: " << season << endl;
 }
+
+Article* Tire::copy() {
+    Article* art = new Tire(getName(), getManufacturer(), getStock(), getDiameter(), getPrice(), getType(), getWidth(), getHeight(), getSpeedIndex(), getSeason());
+    return art;
+}

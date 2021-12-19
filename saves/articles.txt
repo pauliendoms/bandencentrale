@@ -1,0 +1,19 @@
+Fire Rim
+Noodyear
+25
+5
+2.5
+r
+true
+yellow
+5
+Fire Tire
+Noodyear
+26
+5
+2.4
+t
+5
+5
+f
+s

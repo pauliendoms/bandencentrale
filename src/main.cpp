@@ -28,6 +28,8 @@ int main() {
     int keuze = 0;
     int id;
 
+    tirecenter.readArticles();
+    
     user = login();
     while (keuze < 6) {
         cin.ignore();

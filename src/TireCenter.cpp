@@ -2,6 +2,8 @@
 #include <algorithm>
 #include "Rim.h"
 #include "Tire.h"
+#include <fstream>
+#include <cstdlib>
 using namespace std;
 
 #define ENTER cout << "" << endl;
@@ -582,3 +584,43 @@ void TireCenter::searchInvoice() {
             
 }
 
+void TireCenter::readArticles() {
+    ifstream inArticleFile("saves/articles.txt", ios::in);
+
+    if (!inArticleFile) {
+        cerr << "Problem opening file" << endl;
+        exit(EXIT_FAILURE);
+    }
+    
+    string n; string m; int s; int d; float p; char t;
+    int w; int h; string i; char se;
+    bool a; string c;
+
+    while (!inArticleFile.eof()) {
+        getline(inArticleFile, n);
+        getline(inArticleFile, m);
+        inArticleFile >> s;
+        inArticleFile >> d;
+        inArticleFile >> p;
+        inArticleFile >> t;
+        
+    
+        if (t == 't') {
+            inArticleFile >> w;
+            inArticleFile >> h;
+            inArticleFile >> i;
+            inArticleFile >> se;
+
+            Article* art = new Tire(n, m, s, d, p, t, w, h, i, se);
+            articles.push_back(art);
+        } else if (t == 'r') {
+            inArticleFile >> a;
+            inArticleFile >> c;
+            inArticleFile >> w;
+
+            Article* art = new Rim(n, m, s, d, p, t, a, c, w);
+            articles.push_back(art);
+        }
+
+    }
+}
