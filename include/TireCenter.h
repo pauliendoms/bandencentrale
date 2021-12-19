@@ -44,6 +44,12 @@ class TireCenter {
         void searchInvoice();
 
         void readArticles();
+        void readCustomers();
+        void readInvoices();
+
+        void saveArticles();
+        void saveCustomers();
+        void saveInvoices();
     private:
         string name;
         string address;

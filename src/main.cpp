@@ -29,7 +29,9 @@ int main() {
     int id;
 
     tirecenter.readArticles();
-    
+    tirecenter.readCustomers();
+    tirecenter.readInvoices();
+
     user = login();
     while (keuze < 6) {
         cin.ignore();

@@ -5,14 +5,14 @@ Noodyear
 5
 2.5
 r
-true
+1
 yellow
 5
 Fire Tire
 Noodyear
-26
+25
 5
-2.4
+2.5
 t
 5
 5

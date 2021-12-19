@@ -80,6 +80,7 @@ void TireCenter::addCustomer() {
 
     cout << "Customer added" << endl;
     ENTER;
+    saveCustomers();
 }
 
 void TireCenter::listCustomers(vector<Customer*> list) {
@@ -92,6 +93,8 @@ void TireCenter::listCustomers(vector<Customer*> list) {
 void TireCenter::deleteCustomer(int id) {
     customers.erase(customers.begin() + (id-1));
     delete customers[id-1];
+
+    saveCustomers();
 }
 
 void TireCenter::changeCustomer(int id) {
@@ -103,15 +106,17 @@ void TireCenter::changeCustomer(int id) {
     cout << "Enter x if you don't want to make a change." << endl;
     ENTER;
 
+    cin.ignore();
+
     cout << "Enter customer name: " << endl;
     getline(cin, n);
     if (n != "x") {
         cust->setName(n);
     }
 
+    
     cout << "Enter customer address: " << endl;
-    cin >> a;
-    cin.ignore();
+    getline(cin, a);
 
     if (a != "x") {
         cust->setAddress(a);
@@ -151,6 +156,7 @@ void TireCenter::changeCustomer(int id) {
     cout << "Customer added" << endl;
     
     ENTER;
+    saveCustomers();
 }
 
 void TireCenter::searchCustomer(string zoekterm) {
@@ -241,6 +247,7 @@ void TireCenter::addArticle() {
     }
 
     articles.push_back(article);
+    saveArticles();
 }
 
 void TireCenter::listArticles(vector<Article*> list) {
@@ -261,6 +268,8 @@ int TireCenter::articleIndex(Article* art) {
 void TireCenter::deleteArticle(int id) {
     articles.erase(articles.begin() + (id -1));
     delete articles[id-1];
+
+    saveArticles();
 }
 
 void TireCenter::changeArticle(int id) {
@@ -382,6 +391,7 @@ void TireCenter::changeArticle(int id) {
     cout << "Article added" << endl;
     
     ENTER;
+    saveArticles();
 }
 
 void TireCenter::searchArticle(string zoekterm) {
@@ -442,6 +452,7 @@ void TireCenter::updateStock(int id) {
     cin >> stock;
 
     articles[id-1]->setStock(stock);
+    saveArticles();
 }
 
 void TireCenter::order() {
@@ -550,17 +561,9 @@ void TireCenter::addInvoice(int customer_id, vector<Article*> article_list, vect
     Invoice* inv = new Invoice(cust, invoice_articles, price, discount);
 
     invoices.push_back(inv);
+    saveInvoices();
     
 }
-
-/*
-int TireCenter::invoiceIndex(Invoice* inv) {
-    auto i = find(invoices.begin(), invoices.end(), inv);
-
-    int index = i - invoices.begin();
-
-    return index;
-} */
 
 void TireCenter::searchInvoice() {
     string query;
@@ -601,23 +604,16 @@ void TireCenter::readArticles() {
 
     int aantal;
     inArticleFile >> aantal;
-    cout << aantal << endl;
     inArticleFile.ignore();
 
     for (int x = 0; x < aantal; x++) {
         
         getline(inArticleFile, n);
-        cout << n << endl;
         getline(inArticleFile, m);
-        cout << m << endl;
         inArticleFile >> s;
-        cout << s << endl;
         inArticleFile >> d;
-        cout << d << endl;
         inArticleFile >> p;
-        cout << p << endl;
         inArticleFile >> t;
-        cout << t << endl;
         if (t == 't') {
             inArticleFile >> w;
             inArticleFile >> h;
@@ -628,17 +624,239 @@ void TireCenter::readArticles() {
             articles.push_back(art);
         } else if (t == 'r') {
             inArticleFile >> a;
-            cout << a << endl;
             inArticleFile.ignore();
             getline(inArticleFile,c);
-            cout << c << endl;
             inArticleFile >> w;
             inArticleFile.ignore();
-            cout << w << endl;
 
             Article* art = new Rim(n, m, s, d, p, t, a, c, w);
             articles.push_back(art);
         }
     }
     inArticleFile.close();
+}
+
+void TireCenter::readCustomers() {
+    ifstream inCustomerFile("saves/customers.txt", ios::in);
+
+    if (!inCustomerFile) {
+        cerr << "Problem opening file" << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    cout << "File is opened." << endl;
+    
+    string n; string a; char t;
+    string v; int d;
+
+    int aantal;
+    inCustomerFile >> aantal;
+    cout << aantal << endl;
+    inCustomerFile.ignore();
+
+    for (int x = 0; x < aantal; x++) {
+        
+        getline(inCustomerFile, n);
+        getline(inCustomerFile, a);
+        inCustomerFile >> t;
+        if (t == 'c') {
+            inCustomerFile.ignore();
+            getline(inCustomerFile, v);
+            inCustomerFile >> d;
+            inCustomerFile.ignore();
+            Customer* cust = new Company(n, a, t, v, d);
+            customers.push_back(cust);
+        } else if (t == 'p') {
+            inCustomerFile.ignore();
+            Customer* cust = new Customer(n, a, t);
+            customers.push_back(cust);
+        }
+    }
+    inCustomerFile.close();
+}
+
+void TireCenter::saveArticles() {
+    ofstream outArticleFile("saves/articles.txt", ios::out);
+
+    if (!outArticleFile) {
+        cerr << "Problem opening file" << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    outArticleFile << size(articles) << endl;
+
+    for (int i = 0; i< size(articles); i++) {
+        outArticleFile << articles[i]->getName() << endl;
+        outArticleFile << articles[i]->getManufacturer() << endl;
+        outArticleFile << articles[i]->getStock() << endl;
+        outArticleFile << articles[i]->getDiameter() << endl;
+        outArticleFile << articles[i]->getPrice() << endl;
+        outArticleFile << articles[i]->getType() << endl;
+
+        if (articles[i]->getType() == 'r') {
+            Rim* rim = dynamic_cast<Rim*>(articles[i]);
+            outArticleFile << rim->getAluminium() << endl;
+            outArticleFile << rim->getColor() << endl;
+            outArticleFile << rim->getWidth() << endl;
+        } else if (articles[i]->getType() == 't') {
+            Tire* tire = dynamic_cast<Tire*>(articles[i]);
+            outArticleFile << tire->getWidth() << endl;
+            outArticleFile << tire->getHeight() << endl;
+            outArticleFile << tire->getSpeedIndex() << endl;
+            outArticleFile << tire->getSeason() << endl;
+        }
+    }
+
+    outArticleFile.close();
+}
+
+void TireCenter::saveCustomers() {
+    ofstream outCustomerFile("saves/customers.txt", ios::out);
+
+    if (!outCustomerFile) {
+        cerr << "Problem opening file" << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    outCustomerFile << size(customers) << endl;
+
+    for (int i = 0; i< size(customers); i++) {
+        outCustomerFile << customers[i]->getName() << endl;
+        outCustomerFile << customers[i]->getAddress() << endl;
+        outCustomerFile << customers[i]->getType() << endl;
+        
+
+        if (customers[i]->getType() == 'c') {
+            Company* comp = dynamic_cast<Company*>(customers[i]);
+            outCustomerFile << comp->getVat() << endl;
+            outCustomerFile << comp->getVolumeDiscount() << endl;
+        }
+    }
+
+    outCustomerFile.close();
+}
+
+void TireCenter::saveInvoices() {
+    ofstream outInvoiceFile("saves/invoices.txt", ios::out);
+
+    if (!outInvoiceFile) {
+        cerr << "Problem opening file" << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    outInvoiceFile << size(invoices) << endl;
+
+    for (int i = 0; i< size(invoices); i++) {
+        outInvoiceFile << invoices[i]->getCustomer()->getName() << endl;
+        outInvoiceFile << invoices[i]->getCustomer()->getAddress() << endl;
+        outInvoiceFile << invoices[i]->getCustomer()->getType() << endl;
+
+        if (invoices[i]->getCustomer()->getType() == 'c') {
+            Company* comp = dynamic_cast<Company*>(invoices[i]->getCustomer());
+            outInvoiceFile << comp->getVat() << endl;
+            outInvoiceFile << comp->getVolumeDiscount() << endl;
+        }
+
+        outInvoiceFile << size(invoices[i]->getArticles()) << endl;    
+
+        for (int j = 0; j < size(invoices[i]->getArticles()); j++) {
+            outInvoiceFile << invoices[i]->getArticles()[j]->getName() << endl;
+            outInvoiceFile << invoices[i]->getArticles()[j]->getManufacturer() << endl;
+            outInvoiceFile << invoices[i]->getArticles()[j]->getStock() << endl;
+            outInvoiceFile << invoices[i]->getArticles()[j]->getDiameter() << endl;
+            outInvoiceFile << invoices[i]->getArticles()[j]->getPrice() << endl;
+            outInvoiceFile << invoices[i]->getArticles()[j]->getType() << endl;
+
+            if (invoices[i]->getArticles()[j]->getType() == 'r') {
+                Rim* rim = dynamic_cast<Rim*>(invoices[i]->getArticles()[j]);
+                outInvoiceFile << rim->getAluminium() << endl;
+                outInvoiceFile << rim->getColor() << endl;
+                outInvoiceFile << rim->getWidth() << endl;
+            } else if (invoices[i]->getArticles()[j]->getType() == 't') {
+                Tire* tire = dynamic_cast<Tire*>(invoices[i]->getArticles()[j]);
+                outInvoiceFile << tire->getWidth() << endl;
+                outInvoiceFile << tire->getHeight() << endl;
+                outInvoiceFile << tire->getSpeedIndex() << endl;
+                outInvoiceFile << tire->getSeason() << endl;
+            }
+        }
+
+        outInvoiceFile << invoices[i]->getPrice() << endl;
+        outInvoiceFile << invoices[i]->getDiscount() << endl;
+    }
+
+    outInvoiceFile.close();
+}
+
+void TireCenter::readInvoices() {
+    ifstream inInvoiceFile("saves/invoices.txt", ios::in);
+
+    if (!inInvoiceFile) {
+        cerr << "Problem opening file" << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    int aantal; int aantal_arts;
+    string n; string a; char t;
+    string vat; int volumediscount;
+    vector<Article*> invoice_arts;
+    float price; int discount;
+    Customer* cust;
+
+    inInvoiceFile >> aantal;
+
+    for (int i = 0; i < aantal; i++) {
+        inInvoiceFile.ignore();
+        getline(inInvoiceFile, n);
+        getline(inInvoiceFile, a);
+        inInvoiceFile >> t;
+
+        if (t == 'c') {
+            inInvoiceFile >> vat;
+            inInvoiceFile >> volumediscount;
+            cust = new Company(n, a, t, vat, volumediscount);
+        } else if (t == 'p') {
+            cust = new Customer(n, a, t);
+        }
+
+        inInvoiceFile >> aantal_arts;   
+
+        for (int j = 0; j < aantal_arts; j++) {
+            string n; string m; int s; int d; float p; char t;
+            inInvoiceFile.ignore();
+            getline(inInvoiceFile, n);
+            getline(inInvoiceFile, m);
+            inInvoiceFile >> s;
+            inInvoiceFile >> d;
+            inInvoiceFile >> p;
+            inInvoiceFile >> t;
+
+            if (t == 'r') {
+                bool a; string c; int w;
+                inInvoiceFile >> a;
+                inInvoiceFile >> c;
+                inInvoiceFile >> w;
+                
+                Article* art = new Rim(n, m, s, d, p, t, a, c, w);
+                invoice_arts.push_back(art);
+            } else if (t == 't') {
+                int w; int h; string i; char se;
+                inInvoiceFile >> w;
+                inInvoiceFile >> h;
+                inInvoiceFile >> i;
+                inInvoiceFile >> se;
+                
+                Article* art = new Tire(n, m, s, d, p, t, w, h, i, se);
+                invoice_arts.push_back(art);
+            }
+        }
+
+        inInvoiceFile >> price;
+        inInvoiceFile >> discount;
+
+        Invoice* invoice = new Invoice(cust, invoice_arts, price, discount);
+        invoices.push_back (invoice);
+    }
+
+    inInvoiceFile.close();
 }
